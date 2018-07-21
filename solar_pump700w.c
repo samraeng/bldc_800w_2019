@@ -326,7 +326,7 @@ void main(void)
    n=0;
    }
 ///////////////////////////////////////////////////////////////////////
- if(flg_int_cni)ROTATE_FW();
+ if(flg_int_cni){ROTATE_FW();}
  
  
    n++;
@@ -359,7 +359,7 @@ void getspeed(void)
     delay_us(10);
     duty = read_adc();
     if(duty<40)duty=40;
-    if(duty>600)duty=600;
+    if(duty>650)duty=650;
     
     pdc1= pdc2= pdc3=duty; 
   }
@@ -373,11 +373,13 @@ void getspeed(void)
 VOID ROTATE_FW(VOID)
 {flg_int_cni=0;
 INDEX=hall_data.data;
-//DELAY_US(10);
 
-//OVDCON=TABLE_FW[INDEX];
 
-while(!flg_int_cni){OVDCON=TABLE_FW[INDEX];OUTPUT_low(PIN_d1);}
+while(!flg_int_cni)
+   {
+    OVDCON=TABLE_FW[INDEX];
+    OUTPUT_low(PIN_d1);
+   }
 
 }
 
